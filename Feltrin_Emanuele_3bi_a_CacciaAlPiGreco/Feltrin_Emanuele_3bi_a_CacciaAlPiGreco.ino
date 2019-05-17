@@ -27,14 +27,12 @@ void setup() {
   Bottone4 = 5;
   Bottone5 = 6;
   BottoneIniziale = 8;
-
   pinMode (Bottone1,INPUT);
   pinMode (Bottone2,INPUT);
   pinMode (Bottone3,INPUT);
   pinMode (Bottone4,INPUT);
   pinMode (Bottone5,INPUT);
   pinMode (BottoneIniziale,INPUT);
-
 }
 
 void SchermataIniziale()
@@ -54,7 +52,6 @@ void SchermataGioco()
   lcd.setCursor(9,0);
   lcd.print("Punti: " + String(Punti_PartitaCorrente));
 }
-
 
 void AggiornaRecord(int record, int Punti)
 {
@@ -85,7 +82,7 @@ void Gioco()
 {
   bool fatto = false;
   SchermataGioco();
-  while(!fatto)
+  while(!fatto && Vite >0)
   {
     NumeroRandomMetodo(0,9);
     if(NumeroRandom >=0 && NumeroRandom <=5)
@@ -97,7 +94,7 @@ void Gioco()
       int Tempo2;
       bool finito = false;
       while(!finito)
-      {
+      { 
         if(digitalRead(ArrayBottoni[PosizioneRandom]) == HIGH)
         {
           Punti_PartitaCorrente++;
@@ -114,19 +111,50 @@ void Gioco()
     else if(NumeroRandom >=6 && NumeroRandom <= 7)
     {
       //malus
+      PosizioneRandom = random(0,4);
+      lcd.setCursor(ArrayPosizione[PosizioneRandom],1);
+      lcd.print("💣");
+      int Tempo1 = millis();
+      int Tempo2;
+      bool finito = false;
+      while(!finito)
+      {
+        if(digitalRead(ArrayBottoni[PosizioneRandom]) == HIGH)
+        {
+          Vite--;
+          finito = true;
+        }
+         Tempo2=millis();
+         if (Tempo2- Tempo1 >=2000)
+         {
+          finito = true;
+         }
+      }
     }
     else
     {
       //bonus
-    }
-    
-  }
-  
-  
-  
-  
-  
-  
+      PosizioneRandom = random(0,4);
+      lcd.setCursor(ArrayPosizione[PosizioneRandom],1);
+      lcd.print("❤");
+      int Tempo1 = millis();
+      int Tempo2;
+      bool finito = false;
+      while(!finito)
+      {
+        if(digitalRead(ArrayBottoni[PosizioneRandom]) == HIGH)
+        {
+          Vite++;
+          finito = true;
+        }
+         Tempo2=millis();
+         if (Tempo2- Tempo1 >=1500)
+         {
+          finito = true;
+         }
+      }
+    }    
+  } 
 }
 
 
@@ -151,7 +179,4 @@ void loop() {
   SchermataIniziale();
   BottoneInizioMetodo(BottoneIniziale);
   Gioco();
- 
-  
-
 }
