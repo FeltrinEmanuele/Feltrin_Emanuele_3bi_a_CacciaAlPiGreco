@@ -12,9 +12,6 @@ int BottoneIniziale;
 int Record;
 int Vite;
 int Punti_PartitaCorrente;
-int PosizionePiGreco;
-int PosizionePenality;
-int PosizioneJolly;
 int ArrayBottoni[5] = { Bottone1, Bottone2, Bottone3, Bottone4, Bottone5};
 int ArrayPosizione[5] = {0, 4, 8, 12, 15};
 
@@ -156,21 +153,6 @@ void Gioco()
     }    
   } 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void loop() {
   AggiornaRecord( Record, Punti_PartitaCorrente);
