@@ -81,10 +81,10 @@ void Gioco()
   SchermataGioco();
   while(!fatto && Vite >0)
   {
-    NumeroRandomMetodo(0,9);
+    NumeroRandomMetodo(0,10);
     if(NumeroRandom >=0 && NumeroRandom <=5)
     {
-      PosizioneRandom = random(0,4);
+      PosizioneRandom = random(0,5);
       lcd.setCursor(ArrayPosizione[PosizioneRandom],1);
       lcd.print("π");
       int Tempo1 = millis();
@@ -104,11 +104,12 @@ void Gioco()
           Vite--;
          }
       }
+      SchermataGioco();
     }
     else if(NumeroRandom >=6 && NumeroRandom <= 7)
     {
       //malus
-      PosizioneRandom = random(0,4);
+      PosizioneRandom = random(0,5);
       lcd.setCursor(ArrayPosizione[PosizioneRandom],1);
       lcd.print("💣");
       int Tempo1 = millis();
@@ -127,11 +128,12 @@ void Gioco()
           finito = true;
          }
       }
+      SchermataGioco();
     }
     else
     {
       //bonus
-      PosizioneRandom = random(0,4);
+      PosizioneRandom = random(0,5);
       lcd.setCursor(ArrayPosizione[PosizioneRandom],1);
       lcd.print("❤");
       int Tempo1 = millis();
@@ -150,6 +152,7 @@ void Gioco()
           finito = true;
          }
       }
+      SchermataGioco();
     }    
   } 
 }
